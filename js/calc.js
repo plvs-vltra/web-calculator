@@ -1,1 +1,4 @@
-document.body.innerHTML = "This is simple calculator";
+const calculator = document.getElementById('#calculator'),
+      display = document.getElementById("#display"),
+      controls = document.getElementById("controlls");
+
