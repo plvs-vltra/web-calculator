@@ -1,4 +1,4 @@
-![Screen Shot 2022-06-29 at 9 37 48 AM](https://user-images.githubusercontent.com/108326940/176360233-b7ce9206-9b33-48fd-9dd3-7a4cd40e7e7a.png)
+![Screen Shot 2022-06-29 at 10 45 30 AM](https://user-images.githubusercontent.com/108326940/176360703-17048510-fd6b-4b8d-8ca8-a93a7792dcd6.png)
 
 # About
 
