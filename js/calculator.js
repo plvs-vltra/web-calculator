@@ -12,7 +12,7 @@ const HTML_controlls = [...document.querySelectorAll("[data-button-type]")],
 let buffer = [{
     value: 0,
     type: "operand"
-}];
+}], id = 0;
 
 
 
@@ -42,27 +42,14 @@ function addToBuffer(button){
                 }
     } else {
         if(button.type == "operator") {
+            id++;
             if(buffer.length > 0) buffer.push(button);
         } else {
+            id++;
             buffer.push(button);
         }
     }
 }
-
-
-
-function sum(a, b){
-    addToBuffer({
-        value: "+",
-        type: "operator",
-    });
-
-    addToBuffer({
-        value: a + b,
-        type: "operand",
-    });
-}
-
 
 
 function calculate(){
@@ -115,7 +102,9 @@ function detect(button){
         });
 
         showOnDisplay(getBufferLastOperand().value);
-    }else {
+    } else if(button.value == "."){
+        
+    } else {
         addToBuffer(button);
         showOnDisplay(getBufferLastOperand().value);
     }
