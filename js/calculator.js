@@ -12,7 +12,7 @@ const HTML_controlls = [...document.querySelectorAll("[data-button-type]")],
 let buffer = [{
     value: 0,
     type: "operand"
-}], id = 0;
+}], keyup = false;
 
 
 
@@ -42,10 +42,8 @@ function addToBuffer(button){
                 }
     } else {
         if(button.type == "operator") {
-            id++;
             if(buffer.length > 0) buffer.push(button);
         } else {
-            id++;
             buffer.push(button);
         }
     }
@@ -80,7 +78,8 @@ function calculate(){
 
 
 
-function detect(button){
+function detectClick(button){
+
     if(button.value == "C"){
         buffer = [{
             value: 0,
@@ -110,6 +109,64 @@ function detect(button){
     }
 }
 
+function createBufferOperator(value){
+    return {
+        value: value,
+        type: "operator"
+    }
+}
+
+function createBufferOperand(value){
+    return {
+        value: value,
+        type: "operand"
+    }
+}
+
+function isAllowedKey(key){
+    let result = false;
+    console.log(true, key)
+    if( key == 8 || key == 13 || key == 48 || key == 49 || 
+        key == 50 || key == 51 || key == 52 || key == 53 || 
+        key == 54 || key == 55 || key == 56 || key == 57 || 
+        key == 106 || key == 107 || key == 109 || key == 110 || 
+        key == 111 || key == 187 || key == 189
+    ) result = true;
+
+    return result;
+}
+
+function detect2(key){
+    if(isAllowedKey(key.keyCode)){
+        let code = key.key;
+
+        if(key.key == "Enter") code = "=";
+        if(key.key == "*") code = "x";
+
+        if(code == "=" || code == "+" || code == "-" || code == "x" || code == "/"){
+            console.log(code)
+            if(buffer.length >= 3 && getBufferLastItem().type == "operand") showOnDisplay(calculate())
+            addToBuffer(createBufferOperator(code));
+        } else if(key == "."){
+            
+        } else if(key.keyCode == 8){
+            buffer = [{
+                value: 0,
+                type: "operand"
+            }];
+    
+            showOnDisplay("0");
+        }else {
+            let a = createBufferOperand(key.key);
+
+            console.log(a, code, key)
+            addToBuffer(a);
+            showOnDisplay(getBufferLastOperand().value);
+        }
+    }
+
+}
+
 
 
 function showOnDisplay(content){        
@@ -119,9 +176,20 @@ function showOnDisplay(content){
 
 
 controlls.forEach(button => {
-    button.body.addEventListener("click", () => {
+    button.body.addEventListener("click", (key) => {
         detect(button);
         
         console.log(buffer);
     });
+
+    if(!keyup){
+        document.addEventListener("keyup", (event) => {
+            detect2(event);
+
+            console.log(event)
+            console.log(buffer);
+        });
+
+        keyup = true;
+    }
 });
