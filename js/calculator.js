@@ -136,7 +136,7 @@ function isAllowedKey(key){
     return result;
 }
 
-function detect2(key){
+function detectPress(key){
     if(isAllowedKey(key.keyCode)){
         let code = key.key;
 
@@ -177,14 +177,14 @@ function showOnDisplay(content){
 
 controlls.forEach(button => {
     button.body.addEventListener("click", (key) => {
-        detect(button);
+        detectClick(button);
         
         console.log(buffer);
     });
 
     if(!keyup){
         document.addEventListener("keyup", (event) => {
-            detect2(event);
+            detectPress(event);
 
             console.log(event)
             console.log(buffer);
