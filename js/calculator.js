@@ -123,21 +123,22 @@ function createBufferOperand(value){
     }
 }
 
+
 function isAllowedKey(key){
     let result = false;
-    console.log(true, key)
-    if( key == 8 || key == 13 || key == 48 || key == 49 || 
-        key == 50 || key == 51 || key == 52 || key == 53 || 
-        key == 54 || key == 55 || key == 56 || key == 57 || 
-        key == 106 || key == 107 || key == 109 || key == 110 || 
-        key == 111 || key == 187 || key == 189
-    ) result = true;
+
+    if(key == "0" || key == "1" ||  key == "2" ||  key == "3" || 
+       key == "4" ||  key == "5" ||  key == "6" ||  key == "7" || 
+       key == "8" ||  key == "9" ||  key == "+" ||  key == "-" || 
+       key == "*" ||  key == "/" ||  key == "Enter" || key == "Backspace"
+       ) result = true;
 
     return result;
 }
 
+
 function detectPress(key){
-    if(isAllowedKey(key.keyCode)){
+    if(isAllowedKey(key.key)){
         let code = key.key;
 
         if(key.key == "Enter") code = "=";
